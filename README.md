@@ -1,2 +1,0 @@
-# Aestethic
-Yo mamaa
