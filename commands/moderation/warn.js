@@ -9,7 +9,7 @@ module.exports = {
   run: async (client, message, args) => {
     
     if(!message.member.hasPermission("ADMINISTRATOR")) {
-      return message.channel.send("Ah, Dibutuhkan ADMINISTRATOR Permission")
+      return message.channel.send("Ah, Membutuhkan ADMINISTRATOR Permission")
     }
     
     const user = message.mentions.members.first()
@@ -26,6 +26,9 @@ module.exports = {
       return message.channel.send("Warn dirimu sendiri? maap ga bisa")
     }
     
+    if(user.id === '271576733168173057'){
+      return message.channel.send('Ini dev gw anjg')
+    }
     
     const reason = args.slice(1).join(" ")
     

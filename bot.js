@@ -19,7 +19,6 @@ const fs = require("fs");
 const get = require ('node-superfetch')
 const { Canvas } = require('canvas-constructor');
 const Youtube = require("simple-youtube-api");
-const youtube = new Youtube(process.env.YT_API);
 let xp = require("./xl.json");
 client.prefix = default_prefix;
 client.cmds = new Collection();
@@ -93,25 +92,6 @@ let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK) //We declare a 32px font
 client.on("message", async (message) => {
 
 
-  if (message.author.bot || !message.guild) return;
-  let greetingsMsg = ["hi","hai","aloo","hello","hallo","halo","haii","haiii","punten","Hi","Hai","Aloo","Hello","hHllo","Halo","Hii","Haiii"]
-  if(greetingsMsg.includes(message.content)) //shit
-     return message.reply("Hallo, Ada yang bisa saya bantu?");
-  
-  if (message.author.bot || !message.guild) return;
-  let djimjam = ["aadwawd"]
-  if(djimjam.includes(message.content)) //shit
-  return message.reply("Dilarang **:v** Kecuali Ada Subject Predikat yang jelas :V");
-  
-  if (message.author.bot || !message.guild) return;
-  let korea = ["anyyeong","annyeonghaseyo","annyeonghaseyo!","yeoboseyo","yeoboseyo!"]
-  if(korea.includes(message.content))
-  return message.channel.send("안녕하세요 🤞!");
-  
-  if (message.author.bot || !message.guild) return;
-  let punten = ["punten","Punten","Pun10","pun10","P","p","🅿","test"]
-  if(punten.includes(message.content))
-  return message.channel.send("Punten ?");
  //HANDLER
   
   //const args = message.content.slice(client.prefix.length).trim().split(/ +/g);

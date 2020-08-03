@@ -6,6 +6,7 @@ module.exports = {
   name: "credit",
     deskripsi: "Cek credit kamu",
     run: async (client, message, args) => {
+      try {
    var optionRaw = args.slice(0).join(" ");
 var option = optionRaw.toLocaleLowerCase();
     let user = message.mentions.users.first() || message.author;
@@ -16,14 +17,17 @@ var option = optionRaw.toLocaleLowerCase();
     .addField('Acoount Holder 🗄', user.username, true)
     .addField('Account Credit 💵', `${balance === null ? "0" : balance}`, true)
     .setFooter('Silahkan hubungi Owner untuk mengisi saldo kamu / donasi.')
-    message.channel.send(embed)
+    return message.channel.send(embed)
+      } catch (Er) {
+        console.log(Er)
+      }
       
             if (option.match("add")) {
+              if(message.author.id !== '271576733168173057') {return message.channel.send('Jabingan kau')}
     let amount = args[1]; 
          const embeda = new Discord.MessageEmbed()
         .addField('🏛 A e s t h e t i c Bank', `\`💳\` **Kamu berhasil Menambah credit sebesar:** \`Rp.${amount}\``)
         .setColor('#00d2ff')
-         message.delete(embed);
         message.channel.send(embeda);
               
                       db.add(`userBalance_${message.author.id}`, amount);

@@ -16,7 +16,7 @@ client.on("ready", async () => {
     let ran = [
       `${client.users.cache.size} Member`,
       "aes || Customizable",
-      "Happy EID Al'Fitri"
+      "Useless bot"
     ];
     let dom = ran[Math.floor(Math.random() * ran.length)];
     client.user.setPresence({

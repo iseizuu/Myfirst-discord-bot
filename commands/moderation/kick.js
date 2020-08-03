@@ -15,7 +15,7 @@ module.exports = {
     }
   let target = args[0];
   let member = message.guild.members.cache.get(target) || message.mentions.members.first()
-  if (!member) return message.reply(`membernya gada tolol`)
+  if (!member) return message.reply(`membernya gada Sahabat`)
   member.kick()
       return message.reply(` Terkick.`);
   }

@@ -18,9 +18,8 @@ module.exports = {
   let jokeValue = await getJoke();
         let Embed = new Discord.MessageEmbed()
             .setColor("RANDOM")
-            .setDescription('NO, THIS FEAUTURE IS NOT AVAILABLE UNTIL RAMADHAN ENDED :)')
             .setTimestamp()
-            .setImage('https://media.tenor.com/images/de8e71cb7022cc4fefd200662d7b207b/tenor.gif')
+            .setImage(jokeValue.url)
             return message.channel.send(Embed)
     
     
