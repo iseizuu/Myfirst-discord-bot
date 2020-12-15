@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const { MessageEmbed: Embed } = require("discord.js");
 const {prefix = 'aes',
 } = require('./config.json');
-const ytdl = require('ytdl-core');
 
 const client = new Discord.Client();
 const queue = new Map();

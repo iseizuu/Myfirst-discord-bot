@@ -1,17 +1,23 @@
-const Discord = require("discord.js");
-const randomPuppy = require("random-puppy");
+const { get } = require('axios');
 
 module.exports = {
- name: "moe",
-    category: "fun",
-    deskripsi: "Mengirim Random anime dari awnime",
-    run: async (client, message, args) => {
-    randomPuppy('awwnime')
-    .then(url => {
-        const embed = new Discord.MessageEmbed()
-        .setImage(url)
-        .setColor('#ff9900')
-        return message.channel.send({ embed });
-   })
-   }
-}
+    name: 'moe',
+    alias: ['awwnime'],
+    deskripsi: 'Mengirim Random anime dari awwnime',
+    usage: '',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: async(client, message, args) => {
+        const { data } = await get('https://nezumiyuiz.glitch.me/api/anime');
+        return message.channel.send({
+            files: [ {
+                attachment: data.url,
+                name: 'awwnime.png'
+            } ]
+        });
+    }
+};

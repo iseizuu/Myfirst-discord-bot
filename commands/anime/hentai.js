@@ -1,27 +1,28 @@
-const Discord = require("discord.js");
-const superagent = require('superagent');
+const Discord = require('discord.js');
 const axios = require('axios');
 module.exports = {
-  name: "hentai",
-      alias: ["xxx","nfsw"],
-    deskripsi: "Dont do with this commands",
-    run: async (client, message, args) => {
-        //if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Fiture ini hanya bisa digunakan oleh admin :)")
-      if (!message.channel.nsfw && message.member.permissions.has("MANAGE_CHANNELS") && message.guild.me.permissions.has("MANAGE_CHANNELS")) return message.channel.send("Need nfsw channel");
-        let getJoke = async () => {
-              let response = await axios.get(
-        "https://nekos.life/api/v2/img/hentai"
-        );
-      let joke = response.data;
-      return joke;
-    };
-  let jokeValue = await getJoke();
-        let Embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
+    name: 'hentai',
+    alias: ['xxx', 'nfsw'],
+    deskripsi: 'Mengirim gambar hentai',
+    usage: '',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: async(client, message, args) => {
+        if (!message.channel.nsfw) return message.channel.send('Command ini harus berada di nsfw channel');
+        const getNekos = async() => {
+            const response = await axios.get('https://nekos.life/api/v2/img/hentai');
+            const res = response.data;
+            return res;
+        };
+        const result = await getNekos();
+        const Embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
             .setTimestamp()
-            .setImage(jokeValue.url)
-            return message.channel.send(Embed)
-    
-    
-  }
-}
+            .setImage(result.url);
+        return message.channel.send(Embed);
+    }
+};

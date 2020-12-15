@@ -1,40 +1,39 @@
-const Discord = require("discord.js");
-const { stripIndents } = require("common-tags");
+const Discord = require('discord.js');
+const { stripIndents } = require('common-tags');
 
 module.exports = {
-    name: "report",
-    category: "moderation",
-       deskripsi: "Reprot member",
-    usage: "<mention, id>",
-    run: async (client, message, args) => {
+    name: 'report',
+    alias: ['abuse'],
+    deskripsi: 'Melaporkan member',
+    usage: 'report <user>',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: (client, message, args) => {
         if (message.deletable) message.delete();
 
-        let rMember = message.mentions.members.first() || message.guild.members.cache.find(args[0]);
+        const rMember = message.mentions.members.first() || message.guild.members.cache.find(args[0]);
+        if (!rMember) return message.reply('Tag user yang mau dilaporkan');
+        if (rMember.hasPermission('ADMINISTRATOR') || rMember.user.bot) return message.channel.send('Tidak bisa melaporkan user ini');
 
-        if (!rMember)
-            return message.reply("Couldn't find that person?").then(m => m.delete({ timeout: 4000 }));
+        if (!args[1]) return message.channel.send('Kamu tidak menulis alasannya');
 
-        if (rMember.hasPermission("BAN_MEMBERS") || rMember.user.bot)
-            return message.channel.send("Can't report that member").then(m => m.delete({ timeout: 4000 }));
-
-        if (!args[1])
-            return message.channel.send("Please provide a reason for the report").then(m => m.delete({ timeout: 4000 }));
-        
-        const channel = message.guild.channels.cache.find(c => c.name === "music")
-            
-        if (!channel)
-            return message.channel.send("Couldn't find a `#reports` channel").then(m => m.delete({ timeout: 4000 }));
+        const channel = message.guild.channels.cache.find(chh => chh.id === 'CHANNEL ID');
+        if (!channel) return message.channel.send('Channel tidak ditemukan');
 
         const embed = new Discord.MessageEmbed()
-            .setColor("#ff0000")
+            .setColor('#ff0000')
             .setTimestamp()
             .setFooter(message.guild.name, message.guild.iconURL)
-            .setAuthor("Reported member", rMember.user.displayAvatarURL)
+            .setAuthor('Reported member', rMember.user.displayAvatarURL)
             .setDescription(stripIndents`**- Member:** ${rMember} (${rMember.user.id})
-            **- Reported by:** ${message.member}
-            **- Reported in:** ${message.channel}
-            **- Reason:** ${args.slice(1).join(" ")}`);
+            **- Pelapor:** ${message.member}
+            **- Dilaporkan di:** ${message.channel}
+            **- Alasan:** ${args.slice('1').join(' ')}`);
 
         return channel.send(embed);
     }
-}
+};

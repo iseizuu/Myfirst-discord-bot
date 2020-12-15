@@ -1,26 +1,28 @@
-const Discord = require("discord.js");
-const superagent = require('superagent');
+const Discord = require('discord.js');
 const axios = require('axios');
 module.exports = {
-    name: "feed",
-    category: "fun",
-    deskripsi: "Feeding Ur waifu xD",
-    run: async (client, message, args) => {
-        let getJoke = async () => {
-              let response = await axios.get(
-        "https://nekos.life/api/v2/img/feed"
-        );
-      let joke = response.data;
-      return joke;
-    };
-  let jokeValue = await getJoke();
-        let Embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
+    name: 'feed',
+    alias: [''],
+    deskripsi: '',
+    usage: '',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: async(client, message, args) => {
+        const getNekos = async() => {
+            const response = await axios.get('https://nekos.life/api/v2/img/feed');
+            const res = response.data;
+            return res;
+        };
+        const result = await getNekos();
+        const Embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
             .setTitle('Feeding')
             .setTimestamp()
-            .setImage(`${jokeValue.url}`)
-            return message.channel.send(Embed)
-    
-    
-  }
-}
+            .setImage(`${result.url}`);
+        return message.channel.send(Embed);
+    }
+};
