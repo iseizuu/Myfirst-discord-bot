@@ -16,7 +16,7 @@ module.exports = {
 
         const member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
         if (!member) return message.reply('Tag seseorang yang mau di kick');
-        if (!member.kickable) return message.reply(`Aku tidak bisa membanned orang ini.`);
+        if (!member.kickable) return message.reply(`Aku tidak bisa mengekick orang ini.`);
         member.kick();
         return message.reply(` Terkick.`);
     }

@@ -7,10 +7,14 @@ module.exports = {
     category: 'fun',
     deskripsi: 'Kalkulator cinta dengan cara Tag Pasanganmu',
     usage: '[mention | id | username]',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
     run: (client, message, args) => {
         let person = getMember(message, args[0]);
-        if (!args[0]) return message.reply('Tag pasangan kamu 😘');
-
         if (!person || message.author.id === person.id) {
             person = message.guild.members.cache
                 .filter(maa => maa.id !== message.author.id)

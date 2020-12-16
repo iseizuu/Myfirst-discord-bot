@@ -33,4 +33,18 @@ module.exports = class Util {
         return new Intl.DateTimeFormat('en-US').format(date);
     }
 
+    static async promptMessage(message, author, time, validReactions) {
+        // eslint-disable-next-line no-param-reassign
+        time *= '1000';
+
+        // eslint-disable-next-line no-await-in-loop
+        for (const reaction of validReactions) await message.react(reaction);
+
+
+        const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
+        return message
+            .awaitReactions(filter, { max: 1, time })
+            .then(collected => collected.first() && collected.first().emoji.name);
+    }
+
 };

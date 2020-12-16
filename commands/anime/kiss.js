@@ -15,8 +15,6 @@ module.exports = {
      */
     run: async(client, message, args) => {
         let person = getMember(message, args[0]);
-        if (!args[0]) return message.reply('Tag Sesorang yang mau dicium');
-
         if (!person || message.author.id === person.id) {
             person = message.guild.members.cache
                 .filter(mac => mac.id !== message.author.id)
@@ -31,7 +29,7 @@ module.exports = {
         const res = await getNekos();
         const Embed = new Discord.MessageEmbed()
             .setColor('RANDOM')
-            .setTitle(`OwO, ${message.author.username} Mencium ${message.mentions.users.first().username}`)
+            .setTitle(`OwO, ${message.author.username} Mencium ${person.user.username}`)
             .setImage(`${res.url}`);
         return message.channel.send(Embed);
     }
