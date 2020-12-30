@@ -1,35 +1,35 @@
-const Discord = require("discord.js");
-const superagent = require('superagent');
+const Discord = require('discord.js');
 const axios = require('axios');
-const { getMember } = require("../../function.js");
+const { getMember } = require('../../util/Util');
 module.exports = {
-  name: "hug",
-    category: "fun",
-    deskripsi: "Peluk seseorang :)",
-    run: async (client, message, args) => {
-      let person = getMember(message, args[0]);
-          if (!args[0]) return message.reply("Tag Sesorang yang mau dipeluk");
+    name: 'hug',
+    alias: ['peluk'],
+    deskripsi: 'Peluk seseorang :)',
+    usage: 'hug <user>',
 
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: async(client, message, args) => {
+        let person = getMember(message, args[0]);
         if (!person || message.author.id === person.id) {
             person = message.guild.members.cache
-                .filter(m => m.id !== message.author.id)
+                .filter(mac => mac.id !== message.author.id)
                 .random();
         }
 
-        let getJoke = async () => {
-              let response = await axios.get(
-        "https://nekos.life/api/v2/img/hug"
-        );
-      let joke = response.data;
-      return joke;
-    };
-  let jokeValue = await getJoke();
-        let Embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
-            .setTitle(`OwO, ${message.author.username} hug ${message.mentions.users.first().username}`)
-            .setImage(`${jokeValue.url}`)
-            return message.channel.send(Embed)
-    
-    
-  }
-}
+        const getNekos = async() => {
+            const response = await axios.get('https://nekos.life/api/v2/img/hug');
+            const res = response.data;
+            return res;
+        };
+        const res = await getNekos();
+        const Embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
+            .setTitle(`OwO, ${message.author.username} Memeluk ${person.user.username}`)
+            .setImage(`${res.url}`);
+        return message.channel.send(Embed);
+    }
+};

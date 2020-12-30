@@ -1,24 +1,28 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
-    name: "wp",
-  alias: ["wallpaper"],
-    category: "fun",
-    deskripsi: "Anime wallpaper",
-    run: async (client, message, args) => {
-        let getJoke = async () => {
-              let response = await axios.get(
-        "https://nekos.life/api/v2/img/wallpaper"
-        );
-      let joke = response.data;
-      return joke;
-    };
-  let jokeValue = await getJoke();
-        let Embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
+    name: 'wallpaper',
+    alias: ['wall', 'wp'],
+    deskripsi: 'Menampilkan Anime Wallpaper',
+    usage: '',
+
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').Message} message
+     * @param {Array[]} args
+     */
+    run: async(client, message, args) => {
+        const getNekos = async() => {
+            const response = await axios.get('https://nekos.life/api/v2/img/wallpaper');
+            const res = response.data;
+            return res;
+        };
+        const result = await getNekos();
+        const Embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
             .setTimestamp()
-            .setImage(`${jokeValue.url}`)
-            return message.channel.send(Embed)
-  }
-}
+            .setImage(`${result.url}`);
+        return message.channel.send(Embed);
+    }
+};
