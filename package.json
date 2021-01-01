@@ -27,7 +27,7 @@
     "integer": "^4.0.0",
     "jimp": "^0.13.0",
     "kitsu": "^9.1.11",
-    "kitsu.js": "^2.0.0",
+    "mailist": "^1.0.3",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "ms": "^2.1.2",

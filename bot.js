@@ -22,4 +22,4 @@ async function eventinit() {
     }
 }
 eventinit();
-client.login(process.env.Token);
+client.login(process.env.Token ? process.env.Token : client.config.Token);

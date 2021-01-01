@@ -7,7 +7,7 @@ module.exports = client => {
     setInterval(() => {
         const ran = [
             `${client.users.cache.size} Member`,
-            'aes || Customizable',
+            `${client.config.default_prefix} || Customizable`,
             'Useless bot'
         ];
         const dom = ran[Math.floor(Math.random() * ran.length)];

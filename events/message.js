@@ -2,6 +2,7 @@ const xp = require('../json/xp.json');
 const fs = require('fs');
 const db = require('quick.db');
 const { default_prefix } = require('../config.json');
+const { MessageEmbed } = require('discord.js');
 
 /**
  * @param {import('discord.js').Client} client
@@ -28,11 +29,14 @@ module.exports = (client, message) => {
     fs.writeFile('./json/xp.json', JSON.stringify(xp), err => {
         if (err) console.log(err);
     });
-
+    let prefix = db.get(`prefix_${message.guild.id}`);
+    const embed = new MessageEmbed()
+        .setColor('2F3136')
+        .setDescription(`Hai **${message.author.tag}**, prefixku adalah **${prefix || default_prefix}**   🎉🥳`);
+    if (message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>`) return message.channel.send(embed);
     if (message.author.bot) return;
     if (!message.guild) return;
 
-    let prefix = db.get(`prefix_${message.guild.id}`);
     if (prefix === null) prefix = default_prefix;
     if (!message.content.startsWith(prefix)) return;
 
