@@ -36,6 +36,7 @@ module.exports = {
                 .addField('》Genres', res.genres.map(data => data), true)
                 .addField('》Release', `${res.startDate.day}-${res.startDate.month}-${res.startDate.year}` || '??', true);
             return message.channel.send(embed);
-        });
+        })
+            .catch(er => message.channel.send(`Ups: ${er}`));
     }
 };
