@@ -23,8 +23,8 @@ module.exports = {
             .setColor('RANDOM')
             .setTimestamp()
             .setTitle('Here is your Wallpaper')
-            .addField('Download', `[Download here](${result.url})`
-            .setImage(`${result.url}`);
+            .addField('Download', `[Download here](${result.url})`)
+            .setImage(`${result.url}`)
             .setFooter(`Requested by ${message.author.tag}`)
         return message.channel.send(Embed);
     }
