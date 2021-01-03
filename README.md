@@ -4,10 +4,13 @@
 This is my first discord bot that ever i made, this is a rewrite version, if u want to see the original version, u can take a look from another branch.
 
 # Install
+```sh
+yarn install #(in this case i use yarn)
 ```
-yarn install (in this case i use yarn)
+or
+```sh
+npm install #(you can install with npm too)
 ```
-u can install with npm too.
 
 all setup in `config.json`
 
