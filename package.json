@@ -17,7 +17,7 @@
     "custom-translate": "^2.2.8",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ffmpeg": "^0.0.4",
     "foreach-timeout": "^3.0.1",
     "fs": "^0.0.2",
